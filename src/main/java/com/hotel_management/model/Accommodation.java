@@ -20,28 +20,27 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name= "tb_address")
+@Table(name = "tb_accommodation")
 public class Accommodation {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
-	
 
 	Guest guest;
 
 	Room room;
-	
+
 	@Column(name = "check_in")
 	@NotNull(message = "CheckIn is necessary")
 	@Size(min = 2, message = "min size is 2 characters")
 	LocalDate checkIn;
-	
+
 	@Column(name = "check_out")
 	@NotNull(message = "CheckOut is necessary")
 	@Size(min = 2, message = "min size is 2 characters")
 	LocalDate checkOut;
-	
+
 	@Column(name = "total_value")
 	@NotNull(message = "Total Value is necessary")
 	@Size(min = 2, message = "min size is 2 characters")
