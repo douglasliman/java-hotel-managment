@@ -2,12 +2,7 @@ package com.hotel_management.model;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -27,8 +22,12 @@ public class Accommodation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 
+	@OneToOne
+	@JoinColumn(name = "guest_id")
 	Guest guest;
 
+	@OneToOne
+	@JoinColumn(name = "room_id")
 	Room room;
 
 	@Column(name = "check_in")

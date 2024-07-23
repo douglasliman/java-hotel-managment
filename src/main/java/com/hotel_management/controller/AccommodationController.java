@@ -22,8 +22,7 @@ public class AccommodationController {
 	public ResponseEntity<List<Accommodation>> dafne() {
 		return ResponseEntity.ok(accommodationRepository.findAll());
 	}
-	
-	
+
 
 	/*
 	@PostMapping
@@ -31,7 +30,7 @@ public class AccommodationController {
 		if (temaRepository.existsById(postagem.getTema().getId()))
 			return ResponseEntity.status(HttpStatus.CREATED)
 					.body(postagemRepository.save(postagem));
-			
+
 		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema não existe!", null);
 	} */
 	

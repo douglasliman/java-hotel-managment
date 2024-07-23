@@ -2,12 +2,7 @@ package com.hotel_management.model;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -21,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name= "tb_employee")
+@Table(name= "tb_employees")
 public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +37,8 @@ public class Employee {
 	@Size(min = 2, message = "min size is 2 characters")
 	String shift;
 
-	
+	@OneToOne
+	@JoinColumn(name = "address_id")
 	Address address;
 	
 	@Column(name = "salary")
