@@ -1,11 +1,14 @@
 package com.hotel_management.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -26,11 +29,6 @@ public class Address {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 	
-	@Column(name = "country")
-	@NotNull(message = "Country is necessary")
-	@Size(min = 2, message = "min size is 2 characters")
-	String country;
-	
 	@Column(name = "state")
 	@NotNull(message = "State is necessary")
 	@Size(min = 2, message = "min size is 2 characters")
@@ -50,14 +48,15 @@ public class Address {
 	@NotNull(message = "Street is necessary")
 	@Size(min = 2, message = "min size is 2 characters")
 	String street;
-	
-	@Column(name = "zip_code")
-	@NotNull(message = "zip code is necessary")
-	@Size(min = 2, message = "min size is 2 characters")
-	int zipCode;
+
+	@NotNull(message = "Zip code is necessary")
+	@Min(value = 1000000, message = "Zip code must be a valid 7-digit number")
+	@Max(value = 99999999, message = "Zip code must be a valid 8-digit number")
+	@JsonProperty("zip_code")
+	private Integer zipCode;
 	
 	@Column(name = "Number")
 	@NotNull(message = "Number is necessary")
 	@Size(min = 2, message = "min size is 2 characters")
-	int number;
+	String number;
 }
