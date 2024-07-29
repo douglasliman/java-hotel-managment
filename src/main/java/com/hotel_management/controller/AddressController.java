@@ -16,11 +16,13 @@ public class AddressController {
     @Autowired
     private AddressRepository addressRepository;
 
+    //working
     @GetMapping
     public ResponseEntity<List<Address>>getAllAddress(){
         return ResponseEntity.ok(addressRepository.findAll());
     }
 
+    //working
     @PostMapping
     public ResponseEntity<Address>createAddress(@RequestBody Address address){
         Address savedAddress = addressRepository.save(address);

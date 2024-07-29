@@ -18,6 +18,7 @@ public class AccommodationController {
 	@Autowired
 	private AccommodationRepository accommodationRepository;
 
+	//working
 	@GetMapping
 	public ResponseEntity<List<Accommodation>> dafne() {
 		return ResponseEntity.ok(accommodationRepository.findAll());
