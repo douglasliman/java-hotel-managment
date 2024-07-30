@@ -1,11 +1,6 @@
 package com.hotel_management.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -13,12 +8,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_quartos")
+@Table(name = "tb_rooms")
 public class Room {
 	
 	@Id
@@ -29,11 +26,26 @@ public class Room {
 	@NotNull(message = "Number is necessary")
 	@Size(min = 2, message = "min size is 2 characters")
 	int number;
+
 	
 	@Column(name = "floor")
 	@NotNull(message = "Number is necessary")
 	@Size(min = 2, message = "min size is 2 characters")
 	int floor;
+
+	@ManyToMany
+	@JoinTable(
+			name = "room_services",
+			joinColumns = @JoinColumn(name = "room_id"),
+			inverseJoinColumns = @JoinColumn(name = "service_id")
+	)
+	private Set<Services> services;
+
+	@OneToOne
+	@JoinColumn(name = "guest_id")
+	Guest guest;
+
+
 
 	@Column(name = "roomType")
 	@NotNull(message = "Number is necessary")

@@ -1,17 +1,14 @@
 package com.hotel_management.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,7 +18,7 @@ import lombok.Setter;
 @Table(name= "tb_services")
 public class Services {
 	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
@@ -35,6 +32,9 @@ public class Services {
 	@NotNull(message = "Service Value is necessary")
 	@Size(min = 2, message = "min size is 2 characters")
 	double serviceValue;
+
+	@ManyToMany(mappedBy = "services")
+	private Set<Room> rooms;
 	
 	@Column(name = "service_description")
 	@NotNull(message = "Service Description is necessary")

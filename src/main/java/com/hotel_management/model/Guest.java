@@ -1,11 +1,6 @@
 package com.hotel_management.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -20,21 +15,25 @@ import lombok.Setter;
 @Entity
 @Table(name= "tb_guest")
 public class Guest {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
-	
+	private Long id;
+
 	@Column(name = "name")
 	@NotNull(message = "Name is necessary")
 	@Size(min = 2, message = "min size is 2 characters")
-	String name;
-	
+	private String name;
+
 	@Column(name = "document")
 	@NotNull(message = "Document is necessary")
 	@Size(min = 2, message = "min size is 2 characters")
-	String document;
-	
-	
-	Address address;
+	private String document;
+
+	@OneToOne(mappedBy = "guest")
+	private Room room;
+
+	@OneToOne
+	@JoinColumn(name = "address_id")
+	private Address address;
 }

@@ -35,7 +35,6 @@ public class Amenities {
 	@Size(min = 2, message = "min size is 2 characters")
 	String amenityName; 
 	
-	
-	Address address;
+
 
 }
