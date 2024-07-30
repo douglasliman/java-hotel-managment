@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.hotel_management.service.GuestService;
 
 import java.util.List;
 @RestController
@@ -18,6 +19,10 @@ public class GuestController {
 
     @Autowired
     private AddressRepository addressRepository;
+
+    @Autowired
+    private GuestService guestService;
+
 
     //working
     @GetMapping
@@ -42,5 +47,12 @@ public class GuestController {
         return ResponseEntity.ok(guestRepository.findAllByNameContainingIgnoreCase(name));
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<Guest>updateGuest(@RequestBody Guest guest) {
+        return guestService.updateGuest(guest)
+                .map(res -> ResponseEntity.status(HttpStatus.OK).body(res))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+//deu certo
 
 }
